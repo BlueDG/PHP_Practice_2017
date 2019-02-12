@@ -1,0 +1,56 @@
+TODOLIST
+--------
+
+1. Ajout d'une tâche : 
+    - Code HTML du formulaire de création de tâche ( index.phtml )
+        -> noms des champs du formulaire:
+            * title
+            * description
+            * day / month / year 
+            * priority
+            
+    - traitement des données du formulaire ( enregistrement dans un fichier )
+        * récupérer les données du formulaire
+        * les formater si besoin ( date au format américain yyyy-mm-dd )
+        * les enregistrer dans un fichier au format CSV
+        
+            Formats de données
+            ------------------
+            - XML
+            - CSV (comma separeted values)
+            - JSON
+            
+            Le format CSV :
+            ---------------
+            
+                1 ligne = 1 enregistrement (en  l'occurence une tâche)
+                Chaque donnée est séparée par une virgule
+                
+                Par exemple :
+                
+                "Titre de la tache N°1","Description de la tache N°1",2018-05-12,priority-low
+                "Titre de la tache N°2","Description de la tache N°2",2019-05-12,priority-normal
+    
+            Ecrire dans un fichier au format CSV en PHP
+            -------------------------------------------
+            1. Ouvrir le fichier avec la fonction fopen()
+            2. Ecrire dans le fichier au format CSV avec la fonction fputcsv()
+    
+2. Affichage des tâches
+
+3. Suppression des tâches
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

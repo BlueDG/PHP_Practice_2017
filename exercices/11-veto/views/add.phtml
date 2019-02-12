@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajout d'un chien</title>
+</head>
+<body>
+    <h1>Ajout d'un chien</h1>
+    <form action="save.php" method="POST">
+        <input type="text" name="dogName" placeholder="Entrez le nom du chien" required>
+        <input type="text" name="dogRace" placeholder="Indiquez la race du chien" required>
+        <input type="number" name="dogAge" placeholder="Indiquez l'âge du chien" min="1" required>
+        <select name="dogVaccination" required>
+            <option value="">Vaccination</option>
+            <option value="1">Oui</option>
+            <option value="0">Non</option>
+        </select>
+        <input type="url" name="dogPhoto" placeholder="Entrez l'url de la photo" required>
+        <button type="submit">Enregistrer</button>
+    </form>
+</body>
+</html>

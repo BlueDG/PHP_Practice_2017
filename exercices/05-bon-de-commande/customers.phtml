@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>PHP</title>
+    <!-- <link rel="stylesheet" href="order-form.css"> -->
+    
+    <!-- Librairie jQuery en 1-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <!-- Librairie contenant les callbacks AJAX en 2 car needs 1-->
+    <script src="js/ajax.js"></script>
+    
+    <!-- Ici les gestionnaires d'événements en 3 car needs 2-->
+     <script src="js/events.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Rechercher un client</h1>
+        <nav>
+            <a href="index.php">Retour à l'accueil</a>
+        </nav>
+    </header>
+    <main>
+        <form>
+            <label for="search">Recherche par nom du client: </label>
+            <input type="text" id="search" name="search">
+            
+            <!-- Pas besoin de bouton de soumission, le formulaire ne sera jamais soumis -->
+        </form>
+        <section id="results">
+            
+        </section>
+    </main>
+    
+    <!-- Ici le code principal JS -->
+    <script src="js/main.js"></script>
+</body>
+</html> 

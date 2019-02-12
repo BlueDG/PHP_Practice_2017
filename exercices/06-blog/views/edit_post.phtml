@@ -1,0 +1,48 @@
+<!-- Page d'édition d'un article -->
+<h2><i class="fa fa-pencil"></i> Editer un article</h2>
+
+<!-- Formulaire de mise à jour d'un article -->
+<form class="generic-form" action="edit_post.php" method="POST">
+    
+<input type="hidden" name="articleId" value="<?= $article['Id']; ?>">
+    
+    <fieldset>
+        <legend><i class="fa fa-sticky-note-o"></i> Article</legend>
+        <ul>
+            <li>
+                <label for="title">Titre :</label>
+                <!-- on insère le titre dans value, pour viser l'interieur du champ  titre -->
+                <input type="text" id="title" name="title" value="<?= $article['Title']; ?>">
+            </li>
+            <li>
+                <label class="textarea" for="contents">Article :</label>
+                <!-- on insère le texte entre les textarea pour viser l'interieur du champ texte -->
+                <textarea id="contents" name="contents" rows="15"><?= $article['Contents']; ?></textarea>
+            </li>
+            <li>
+                <label for="author">Auteur :</label>
+                <select id="author" name="author">
+                    <!-- Pour chaque case du tableau $authors on stocke la valeur de cette case dans $author -->
+                    <?php foreach($authors as $author): ?>
+                    
+                        <?php 
+                            // Est-ce que l'id de l'auteur courant est égal à l'id de l'auteur de l'article ?
+                            if( $author['Id'] == $article['Author_Id']){
+                                $selected = 'selected';
+                            } 
+                            // Sinon 
+                            else {
+                                $selected = '';
+                            }
+                        
+                        ?>
+                    
+                        <option <?= $selected; ?> value="<?= $author['Id']; ?>"><?= $author['Lastname']; ?> <?= $author['Firstname']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </li> 
+            <li>
+                <button class="button button-primary" type="submit">Mettre à jour</button>
+            </li>
+        </ul>
+</form>

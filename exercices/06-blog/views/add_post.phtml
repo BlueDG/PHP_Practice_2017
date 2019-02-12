@@ -1,0 +1,44 @@
+
+        <!-- page d'ajout d'un article -->
+        <h2><i class="fa fa-pencil"></i>Rédiger un nouvel article</h2>
+        
+        <!-- formulaire de saisie d'un nouvel article -->
+        <!-- add_post gère à la fois l'affichage et le fonctionnement -->
+        <form action= "add_post.php" method= "POST" class= "generic-form">
+            <!-- creation d'un groupe de champs -->
+            <fieldset class="form">
+                <!-- Nom du groupe de champs -->
+                <legend><i class="fa fa-sticky-note-o"></i> Nouvel Article</legend>
+                
+                <ul>
+                    <li>
+                       <label>Titre: </label>
+                        <input class="title" type="text" name="title" placeholder="" id="title" required> 
+                    </li>
+                    <li>
+                        <!-- contenu de l'article -->
+                       <label class="textarea" for="contents">Contenu: </label>
+                       <textarea name="contents" id="contents" rows="15"></textarea> 
+                    </li>
+                    <li>
+                        <label for="author">Auteur: </label>
+                        <select name="authorId" id="author">
+                            <!-- value va contenir l'Id de l'auteur  -->
+                            <!-- tjrs foreach pour parcourir un tab  -->
+                            <!-- pour chaque case du tab $authors, on stocke la valeur de cette case dans $author  -->
+                            <!-- l'ID de l'auteur va dans la value car c'est caché de l'internaute  -->
+                            <?php foreach($authors as $author): ?>
+                            <option value="<?= $author['Id']; ?>"><?= $author['Lastname']; ?> <?= $author['Firstname']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </li>
+                    <li>
+                       <button type="submit"><i class="fas fa-save"></i> Enregistrer</button>
+                       <button type="submit"><i class="fas fa-save"></i> Annuler</button> 
+                    </li>
+                </ul>
+            </fieldset>
+            
+        </form>
+  
+ 

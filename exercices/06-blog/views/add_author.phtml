@@ -1,0 +1,30 @@
+ <!-- page d'ajout d'un auteur -->
+        <h2><i class="fa fa-pencil"></i>Ajouter un nouvel auteur</h2>
+        
+        <!-- formulaire de saisie d'un nouvel article -->
+        <!-- add_post gère à la fois l'affichage et le fonctionnement -->
+        <form action= "add_author.php" method= "POST" class= "generic-form">
+            <!-- creation d'un groupe de champs -->
+            <fieldset class="form">
+                <!-- Nom du groupe de champs -->
+                <legend><i class="fa fa-sticky-note-o"></i> Nouvel Auteur</legend>
+                
+                <ul>
+                    <li>
+                       <label>Nom: </label>
+                        <input class="lastname" type="text" name="lastname" placeholder="" id="lastname" required> 
+                    </li>
+                    <li>
+                       <label>Prénom: </label>
+                       <input class="firstname" type="text" name="firstname" placeholder="" id="firstname" required> 
+                    </li>
+                    <li>
+                       <button type="submit"><i class="fas fa-save"></i> Enregistrer</button>
+                       <button type="submit"><i class="fas fa-save"></i> Annuler</button> 
+                    </li>
+                </ul>
+            </fieldset>
+            
+        </form>
+  
+ 

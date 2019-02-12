@@ -1,0 +1,50 @@
+
+    <section>
+        <h1>Page d'accueil</h1>
+        
+        <!-- Afficher ici la liste des commandes sous forme d'un tableau HTML -->
+        
+        <!-- Il va falloir parcourir le tableau contenant les commandes : $listArticle -->
+        <table class="standard-table">
+            <caption>Liste des articles</caption>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Extrait</th>
+                    <th>Auteur</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pour chaque case du tableau $listArticle PHP va ranger la valeur de cette case dans $article -->
+                <!-- Ex. Premier tour de boucle : $article va contenir le premier article -->
+                <!-- $listArticle est le tableau et $article représente chacune des valeurs du tableau -->
+                <!-- $listArticle est la variable qui contient le tableau des commandes -->
+                <!-- $article contient successivement chaque élément du tableau, càd chaque commande -->
+                <?php foreach($listArticle as $article): ?>
+                <tr>
+                    <!-- va chercher la colonne (case) articleNumber dans le tableau $listArticle -->
+                    <!-- le ? précède le nom qu'on choisit pour le paramètre qui voyage dans l'url / le = est pour la valeur, ici le titre de l'article -->
+                    <td><a href="show_post.php?articleId=<?= intval($article['Article_Id']); ?>">
+                        <!-- Ajout d'un lien pour amener l'internaute vers la page de détails sur l'article -->
+                        <!-- On ajoute dans l'url du lien une "chaîne de requête", qui commence par "?"
+                             et qui va pemettre de transmettre le titre de l'article à afficher directement dans l'url de la page -->
+                        <!-- Par exemple l'url du premier lien sera : order-form.php?Title=10100 -->
+                        <?= htmlspecialchars($article['Title']); ?>
+                    </a></td>
+                    <td>
+                        <?= htmlspecialchars($article['Abstract']); ?> [...]
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($article['Firstname']); ?> <?= htmlspecialchars($article['Lastname']); ?>
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($article['Created_At']); ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+    </section>
+   

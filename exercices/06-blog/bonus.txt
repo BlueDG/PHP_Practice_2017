@@ -1,0 +1,59 @@
+=> Fonctionnalités supplémentaires envisageables
+    - Faire une fonction PHP qui tronque une chaîne de caractères sans couper de mots
+    - Faire une fonction PHP qui à partir d'une date au format américain (BDD) retourne une date formatée
+    - Vérifier la validité des données reçues en GET (les Id)
+    - Ajouter des catégories aux articles
+    - ...
+    - 
+    - [DONE] ajout de commentaires par les internautes
+    - Suppression d'un article en AJAX
+    - Suppression multiple d'articles avec des cases à cocher
+    - gérer les commentaires dans l'admin (pouvoir modifier un commentaire, le supprimer, le mettre hors-ligne)
+    - gérer les auteurs dans l'admin (pouvoir modifier un auteur, le supprimer)
+    - ajouter des messages flash lors des actions : ajout, modification, suppression d'un article, ajout d'un commentaire
+    - gérer une date de publication
+    - ajouter une image aux articles : uploader côté serveur une image depuis le poste client
+        => Ajouter dans le formulaire de création un champ de type "file"
+        => Copier côté serveur le fichier image dans un dossier img
+        => En BDD : ajouter un champ textuel pour enregistrer le nom des fichiers 
+        => /!\ Beaucoup de précautions à prendre (un fichier a-t-il été ajouté dans le formulaire ? Taille ? Type ? etc)
+            
+        * Doc : http://php.net/manual/fr/features.file-upload.post-method.php   
+        * Tuto : https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql/transmettre-des-donnees-avec-les-formulaires
+    - ajouter un éditeur WYSIWYG comme TinyMCE
+
+=> Refactoring technique
+    - données de connexion dans un fichier à part
+    - [DONE] création de la connexion BDD dans un fichier à part
+    - créer une fonction pour faire une redirection avec éventuellement des paramètres dans l'url
+    - créer une fonction pour générer le rendu d'une page à partir d'un template et d'un tableau de variables
+    - créer des fonctions pour faire les requêtes spécifiques (lister les articles, lister les commentaires, etc)
+    - ...
+    - [DONE] utiliser un fichier layout.phtml comme template global pour ne pas répéter le code HTML
+    - Créer un router basique pour que toutes les pages pointent vers l'index.php
+    - Utiliser un moteur de template comme Twig
+    
+    
+    - créer des fonctions pour faire des requêtes SQL génériques : requête de sélection d'un élément, requête de sélection de plusieurs éléments, requête d'action
+        => Créer dans un fichier db.php les fonctions suivantes :
+        
+            * Fonction query
+                -> ce qu'elle doit faire : exécute une requête de sélection et retourne tous les résultats
+                -> paramètres :
+                      - $sql : la requête SQL à exécuter
+                      - $params : (facultatif) un tableau avec des paramètres à insérer dans la requête
+                -> valeur de retour : tous les résultats de la requête sous forme de tableau
+                
+            * Fonction queryOne
+                -> ce qu'elle doit faire : exécute une requête de sélection et retourne un résultat
+                -> paramètres :
+                      - $sql : la requête SQL à exécuter
+                      - $params : (facultatif) un tableau avec des paramètres à insérer dans la requête
+                -> valeur de retour : 1 résultat 
+                
+            * Fonction execute
+                -> ce qu'elle doit faire : exécute une requête d'action 
+                -> paramètres :
+                      - $sql : la requête SQL à exécuter
+                      - $params : (facultatif) un tableau avec des paramètres à insérer dans la requête
+                -> valeur de retour : le résultat de la requête d'action, l'id de l'enregistrement en cas de requête d'insertion      

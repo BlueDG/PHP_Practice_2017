@@ -1,0 +1,87 @@
+
+        <h2><i class="fa fa-cogs"></i> Tableau de bord Administration</h2>
+        <!-- Navigation du tableau de bord -->
+        
+        
+        <!-- Il va falloir parcourir le tableau contenant les commandes : $listArticle -->
+        <table class="standard-table">
+            <caption>Liste des articles</caption>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($listArticle as $article): ?>
+                <tr>
+                    <td><a href="show_post.php?articleId=<?= intval($article['Article_Id']); ?>">
+                        <?= htmlspecialchars($article['Title']); ?></a>
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($article['Firstname']); ?> <?= htmlspecialchars($article['Lastname']); ?>
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($article['Created_At']); ?>
+                    </td>
+                    <td>
+                        <!-- Je m'inspire du lien présent dans l'Index. on lie vers edit post puis on ajoute l'ID de l'article dans l'URL -->
+                        <a class="edit" href="edit_post.php?articleId=<?= $article['Article_Id']; ?>"><i class="fa fa-pencil"></i> Modifier</a>
+                        <a class="remove" href="delete_post.php?articleId=<?= $article['Article_Id']; ?>"><i class="fa fa-remove"></i> Supprimer</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+        <nav>
+            <!-- Lien vers le formulaire de création d'un article -->
+            <a href="add_post.php">Rédiger un nouvel article</a>
+        </nav>
+        
+    
+        <table>
+            <caption>Liste des auteurs</caption>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <aside>
+                    <p><?= $message; ?></p>
+                </aside>
+                
+                
+                
+              <?php foreach($listAuthor as $author): ?>
+                <tr id="author-<?= $author['Id']; ?>">
+                    <td>
+                        <?= htmlspecialchars($author['Lastname']); ?>
+                    </td>
+                    <td>
+                        <?= htmlspecialchars($author['Firstname']); ?>
+                    </td>
+                    <td>
+                        <a class="edit" href="edit_author.php?authorId=<?= $author['Id']; ?>"><i class="fa fa-pencil"></i> Modifier</a>
+                        <!-- <a class="remove remove-author" class="remove" href="delete_author.php?authorId=<?= $author['Id']; ?>"><i class="fa fa-remove"></i> Supprimer</a> -->
+                        
+                        <!-- on modifie l'action de supprimer pour incorporer du JQUERY AJAX -->
+                        <!-- on cible ce truc avec la balise PHP authorId qu'on a créé en cours PHP afin de pouvoir cibler le bouton supprimer et travailler dessus en JS! -->
+                        <a data-id="<?= $author['Id']; ?>" class="remove remove-author" class="remove" href="delete_author.php?authorId=<?= $author['Id']; ?>"><i class="fa fa-remove"></i> Supprimer</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?> 
+            </tbody>
+        </table>
+        
+        <nav>
+            <!-- Lien vers le formulaire de création d'un auteur -->
+            <a href="add_author.php">Ajouter un auteur</a>
+        </nav>
+   

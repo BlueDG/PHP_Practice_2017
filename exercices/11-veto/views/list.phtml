@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste des chiens</title>
+</head>
+<body>
+  <header>
+      
+  </header>
+  <section>
+      <h1>Liste des chiens</h1>
+      <table class="standard-table">
+            <caption>Liste des chiens</caption>
+            <a href="add.php">Ajouter un chien</a>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Nom</th>
+                    <th>Âge</th>
+                    <th>Race</th>
+                    <th>Vaccination</th>
+                    <th>Photo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($dogs as $dog): ?>
+                <tr>
+                    
+                    <td>
+                        
+                        <a href="edit.php?dogNumber=<?= $dog['Id']; ?>"><?= $dog['Id']; ?></a>
+                    </td>
+                    <td>
+                        <?= $dog['nom']; ?>
+                    </td>
+                    <td>
+                        <?= $dog['age']; ?> an(s)
+                    </td>
+                    <td>
+                        <?= $dog['race']; ?>
+                    </td>
+                    <td><!-- Ici on affiche un terme OU un autre grâce au système Booléen-->
+                      <?php if($dog['vaccination'] == 1) : ?>
+                        Oui
+                      <?php else: ?>
+                        Non
+                      <?php endif ?>
+                    </td>
+                    <td>
+                      <img src="<?= $dog['photo']; ?>" alt="">
+                    </td>
+                    <td>
+                        <a href="edit.php?id=<?= $dog['Id']; ?>">Modifier</a>
+                        <br>
+                        <a href="delete.php?id=<?= $dog['Id']; ?>" onclick="return confirm('Attention, êtes vous sur de vouloir supprimer <?= $dog['nom']; ?> ?');">Supprimer</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+  </section>
+  
+</body>
+</html>

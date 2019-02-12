@@ -1,0 +1,25 @@
+<!-- Page d'édition d'un auteur -->
+<h2><i class="fa fa-pencil"></i> Editer un auteur</h2>
+
+<!-- Formulaire de mise à jour d'un auteur -->
+<form class="generic-form" action="edit_author.php" method="POST">
+    
+<input type="hidden" name="id" value="<?= $author['Id']; ?>">
+    
+    <fieldset>
+        <legend><i class="fa fa-sticky-note-o"></i> Auteur</legend>
+        <ul>
+            <li>
+                <label for="lastname">Nom :</label>
+                <!-- on insère le titre dans value, pour viser l'interieur du champ  titre -->
+                <input type="text" id="lastname" name="lastname" value="<?= $author['Lastname']; ?>">
+            </li>
+            <li>
+                <label for="firstname">Prénom :</label>
+                <input type="text" id="firstname" name="firstname" value="<?= $author['Firstname']; ?>">
+            </li>
+            <li>
+                <button class="button button-primary" type="submit">Mettre à jour</button>
+            </li>
+        </ul>
+</form>

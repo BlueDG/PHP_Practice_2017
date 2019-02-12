@@ -1,0 +1,47 @@
+TRADUCTEUR
+----------
+
+-> Quelles données on manipule ? Comment stocker ces données ?
+    -> Comment associer les mots français et les mots anglais ?
+    
+-> Comment faire la traduction ?
+
+-> Comment envoyer les données du formulaire ?
+-> Comment récupérer ensuite ces données ?
+
+Transmission de données par formulaire
+--------------------------------------
+
+<form action="target.php" method="">
+
+</form>
+
+- L'attribut "action" permet de préciser vers quelle url envoyer les données du formulaire
+- L'attribut "method" estquant à lui GET ou POST.
+
+
+-le protocole HTTP, possède deux méthodes pour faire voyager les données entre le client et le serveur.
+    1) directement dans l'URL, la méthode GET.
+        exemple <form action="target.php" method="GET">
+    2) masquée aux yeux de l'internaute, car l'URL ne bouge pas, on appelle ça la méthode POST.
+        exemple <form action="target.php" method="POST">
+        
+Ce sont les moyens pour faire voyager les données du formulaire
+
+Exemple:
+
+            <form action="target.php" method="POST">
+                <input type="text" name="field1">
+                
+
+-> Récupérer les valeurs d'un formulaire
+    Dans le fichier cible (target.php dans l'exemple) :
+    
+    On va disposer de variables "super globales":
+        -> méthode GET : $_GET
+        -> méthode POST : $_POST
+        
+        $_GET et $_POST sont des tableaux associatifs dont les clés sont le nom des champs du formulaire
+        
+        Ex: $_POST['field1'] représente dans l'exemple la valeur du champ avec le name 'field1'
+

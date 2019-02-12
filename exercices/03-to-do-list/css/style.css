@@ -1,0 +1,9 @@
+
+p{
+    display: none;
+}
+
+
+li:hover p{
+    display: block;
+}

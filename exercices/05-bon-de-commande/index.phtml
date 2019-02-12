@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>PHP</title>
+    <link rel="stylesheet" href="order-form.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="customers.php">Recherche clients</a>
+        </nav>
+    </header>
+    <section>
+        <h1>Bons de commande</h1>
+        
+        <!-- Afficher ici la liste des commandes sous forme d'un tableau HTML -->
+        
+        <!-- Il va falloir parcourir le tableau contenant les commandes : $orders -->
+        <table class="standard-table">
+            <caption>Liste des commandes</caption>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Date de la commande</th>
+                    <th>Date de livraison</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pour chaque case du tableau $orders PHP va ranger la valeur de cette case dans $order -->
+                <!-- Ex. Premier tour de boucle : $order va contenir la première commande -->
+                <!-- $orders est le tableau et $order représente chacune des valeurs du tableau -->
+                <!-- $orders est la variable qui contient le tableau des commandes -->
+                <!-- $order contient successivement chaque élément du tableau, càd chaque commande -->
+                <?php foreach($orders as $order): ?>
+                <tr>
+                    <!-- va chercher la colonne (case) ordernumber dans le tableau $order -->
+                    <!-- le ? précède le nom qu'on choisit pour le paramètre qui voyage dans l'url / le = est pour la valeur, ici le numéro de la commande-->
+                    <td>
+                        <!-- Ajout d'un lien pour amener l'internaute vers la page de détails de la commande -->
+                        <!-- On ajoute dans l'url du lien une "chaîne de requête", qui commence par "?"
+                             et qui va pemettre de transmettre le numéro de la commande à afficher directement dans l'url de la page -->
+                        <!-- Par exemple l'url du premier lien sera : order-form.php?orderNumber=10100 -->
+                        <a href="order-form.php?orderNumber=<?= $order['orderNumber']; ?>"><?= $order['orderNumber']; ?></a>
+                    </td>
+                    <td>
+                        <?= $order['orderDate']; ?>
+                    </td>
+                    <td>
+                        <?= $order['shippedDate']; ?>
+                    </td>
+                    <td>
+                        <?= $order['status']; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+    </section>
+</body>
+</html>    

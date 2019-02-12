@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="700px" height="800px" xml:lang="fr">
+    
+    
+    <!-- On va faire du SVG classique puis ensuite faire du SVG via PHP -->
+    <!-- Le x correspond de gauche à droite, le y de haut en bas -->
+    
+    
+   <title>Un rectangle en SVG</title>
+   <!--<rect x="100" y="100" opacity="0.5" width="150" height="100"/>-->
+   <?= drawRectangle(100, 100,'orange', 150, 200, 1); ?>
+   <desc>Propriétés du rectangle: 150 de largeur et 100 de hauteur.</desc>
+   
+   <title>Un carré en SVG</title>
+   <!--<rect x="400" y="100" fill="lightpink" width="50" height="50"/>-->
+   <?= drawSquare(400, 100,'lightpink', 100); ?>
+   
+   <title>Une ellipse en SVG</title>
+   <!--<ellipse cx="400" cy="300" rx="100" ry="50"/>-->
+   <?= drawEllipse(300, 200, 'forestgreen', 35, 120, 0.4); ?>
+   
+   <title>Un cercle en SVG</title>
+   <!--<circle cx="200" cy="300" fill="lightblue" r="50"/>-->
+   <?= drawCircle(200, 420, 'lightblue', 100); ?>
+   
+   <title>Un triangle en SVG</title>
+   <!--<polygon points="100 400, 200 600, 300 500" fill="crimson"/>-->
+   <?= drawTriangle(100, 700, 200, 550, 300, 700, 'crimson'); ?>
+   
+   <title>Un polygone en SVG</title>
+    <!--polygon points="300 300 450 280 500 400 600 400 860 240" fill="red" opacity="1" /-->
+    <?= drawPolygon([300,400,400,300,500,400,400,500,450,350], 'red'); ?>
+   
+</svg>

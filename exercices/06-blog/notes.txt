@@ -1,0 +1,374 @@
+/**************************************
+/* CONCEPTION DE LA BASE DE DONNEES
+/**************************************
+
+Table Post (Articles)
+--------------------
+
+* Id (identifiant, "clé primaire" de la table Post)
+* Title (titre de l'article)
+* Contents (contenu de l'article, paragraphes de texte)
+* Created_At (Date et heure de création de l'article)
+* Author_Id (identifiant de l'auteur de l'article, "clé étrangère")
+
+
+Table Author (Auteurs)
+----------------------
+* Id (identifiant, "clé primaire" de la table Author)
+* Firstname (Prénom de l'auteur)
+* Lastname (Nom de l'auteur)
+
+
+
+/**************************************
+/* PAGE D'AJOUT D'ARTICLE (FORMULAIRE)
+/**************************************
+- add_post.php (traitements PHP, uniquement du PHP)
+- add_post.phtml (fichier de template, la vue, le code HTML de la page + quelques bouts de PHP)
+
+2 grandes étapes :
+----------------
+
+    1°) Afficher le formulaire d'ajout d'article
+        -> Créer le code HTML du formulaire dans le fichier add_post.phtml
+        -> On enverra les données du formulaire en POST vers la même page add_post.php)
+        -> Penser aux attributs action et method de la balise <form>
+        -> Créer des labels pour chaque champ
+        -> Penser à donner des noms à tous les champs (attribut 'name')
+        -> Pour la sélection de l'auteur, on propose une liste déroulante à l'internaute
+            => Il va donc falloir sélectionner les auteurs dans la BDD pour afficher cette liste déroulante
+        
+    2°) Traiter les informations du formulaire une fois le formulaire rempli et soumis
+    
+        * a) on traite des données et insére les données
+        
+        Si le formulaire a été soumis 
+            -> Récupérer les données du formulaire (post = $_post; voir traducteur)
+            -> Les enregistrer dans la BDD (Il va falloir faire une requête d'insertion)
+            -> On redirige ensuite l'internaute vers la page d'accueil du blog
+            
+        * b) on affiche le formulaire (fait en premier le matin du cours, avec select tout ça, a partir de l'étape requête sql, on affiche en premier avant de pouvoir le remplir)
+        
+        Sinon, le formulaire n'a pas encore été soumis, on l'affiche
+            -> On sélectionne les auteurs dans la BDD
+            -> On inclut le fichier de template add_post.phtml
+            -> Cf point 1°)
+            
+            
+    ******************
+    /* PAGE D'ACCUEIL
+    /******************
+    
+    Objectif : afficher la liste des article sous forme de résumés :
+        * Titre
+        * Début du texte (150 premiers caractères)
+        * Nom et prénom de l'auteur
+        * Date de création
+    
+    Fichiers concernés : 
+        - index.php (traitements PHP)
+        - index.phtml (affichage = code HTML)
+        
+    Etapes : 
+    
+        1°) Traitements PHP (fichier index.php)
+            -> Sélection des données des articles
+                - Connexion BDD
+                - Construction requête SQL
+                - Préparation requête
+                - Exécution requête
+                - Récupération résultats
+                
+            -> Inclusion du template
+            
+        2°) Affichage (index.phtml)
+            -> Affichage des données des articles dans le code HTML
+            
+            
+            
+    // SECURITE - Failles XSS
+// Principe : faire exécuter du code javascript malveillant sur la page
+
+S'en protéger : 
+
+=> A chaque fois qu'on va écrire une donnée dans le code HTML ,
+   on va transformer les caractères spéciaux en entités HTML 
+   avec la fonction htmlspecialchars
+   
+   Rem. : on peut aussi utiliser la fonction htmlentities
+   Rem. : on peut aussi supprimer les balises html avec la fonction strip_tags
+    
+    
+    
+
+
+/******************
+/* PAGE ARTICLE
+/******************
+
+Objectif : 
+    => au clic sur le titre d'un article sur la page d'accueil, on arrive sur la page détaillée de l'article
+    
+    -> Ajouter des liens sur la page d'accueil (index.phtml) autour des titres des articles
+       Cible des liens : show_post.php
+       
+       /!\ Il va falloir transmettre dans les liens l'identifiant de l'article à afficher
+       
+Fichiers :
+
+    - show_post.php (traitements PHP)
+    - show_post.phtml (code HTML)
+
+    1°) Traitements PHP (show_post.php)
+    
+        -> Aller chercher dans la BDD les données de l'article à afficher
+           * Rem. : récupérer l'id de l'article dans l'url    
+
+    2°) Affichage (show_post.phtml)
+    
+        -> Afficher toutes les informations de l'article :
+            * Titre
+            * Texte complet
+            * Nom et prénom de l'auteur
+            * Date de création
+
+    ************************************************************
+    Rappel sur la transmission de données d'une page à une autre
+    ************************************************************
+    2 cas de figure :
+    
+        >>> Via l'url <<<
+        
+        Plus précisément dans la "chaîne de requête" (queryString)
+          Exemple : dans l'url www.google.com?q=pandas&param2=valeur2, la chaîne de requête est : ?q=pandas&param2=valeur2
+          => méthode HTTP GET
+          => Exemple de cas d'utilisation : un lien (par exemple : edit_post.php?postId=34)
+          
+          Côté PHP, pour récupérer les données transmises dans la chaîne de requête :
+              Les données de l'url sont stockées par PHP dans la variable superglobale $_GET
+              $_GET est un tableau associatif dont les clés sont le nom des paramètres de l'url
+              Par exemple : 
+                    Avec l'url edit_post.php?postId=34, pour récupérer la donnée "postId" :
+                        $postId = $_GET['postId'];
+                        
+            * Openclassrooms : https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/912799-transmettre-des-donnees-avec-lurl
+    
+    
+        >>> Via un formulaire <<<
+        
+            => méthode HTTP POST ou GET en fonction de la valeur de l'attribut method de la balise <form>
+            
+            Côté PHP, pour récupérer les données transmises dans le formulaire :
+                -> Si le formulaire est en POST => $_POST
+                    $_POST est un tableau associatif dont les clés sont le nom des champs du formulaire (attributs name)
+                    
+                -> Si le formulaire est en GET  => $_GET
+                
+            * Openclassrooms : https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/913099-transmettre-des-donnees-avec-les-formulaires
+            
+  Refactoring
+***********
+
+34 * 2 + 34 * 7 + 34 * 12
+
+34 * (2 + 7 + 12)
+
+"Factoriser" le code : 
+    - simplifier 
+    - améliorer
+    - transformer le code pour ne pas se répéter
+    
+Points d'amélioration : ne pas répéter de code
+
+    * Connexion à la BDD
+    * Code HTML header + footer
+    
+    * Processus pour exécuter une requête SQL
+    
+/************************
+/* AJOUT DE COMMENTAIRES
+/************************
+
+    -> Creér une table dans la BDD pour stocker les commentaires
+    
+        Table Comment
+        -------------
+        * Id (identifiant) : type INT, index PRIMARY, A.I., unsigned
+        * Nickname (pseudo) : type VARCHAR 50 
+        * Contents (texte) : type TEXT
+        * Created_At (Date d'ajout du commentaire) : type DATETIME
+        * Post_Id (clé étrangère pour faire le lien avec la table Post) : type INT, index INDEX, unsigned
+        
+            /!\ le champ Post_Id doit avoir EXACTEMENT les mêmes caractéristiqueschamp Id de la table Post
+        
+    -> Ajouter le code HTML du formulaire d'ajout de commentaire dans le show_post.phtml
+    
+        /!\ Pour éviter les doublons de commentaires au rechargement de page on va envoyer les données
+            vers un autre fichier : add_comment.php
+            Puis on redirigera l'internaute vers la page de l'article
+    
+    -> Enregistrer les données du formulaire dans la BDD (fichier add_comment.php)
+        * ajout des données du formulaire dans la BDD
+        * Redirection vers la page de l'article
+    
+    -> Afficher sur la page article la liste des commentaires associés à l'article
+        - show_post.php : sélection des données dans la BDD (liste des commentaires)
+        - show_post.phtml : affichage des commentaires
+    
+    
+/*********************************
+/* TABLEAU DE BORD ADMINISTRATION
+/*********************************
+
+Fichiers
+
+    - admin.php (traitements)
+        -> Sélection de la liste des articles
+    
+    - admin.phtml (template, affichage)
+        -> Bouton "Nouvel article" (lien vers la page add_post.php)
+        -> Liste des articles sous forme d'un tableau avec :
+            * Date de création
+            * Titre 
+            * Auteur
+            * Bouton "Modifier" et bouton "Supprimer"
+    
+    
+/****************************
+/* MODIFICATION D'UN ARTICLE
+/****************************
+
+=> Faire le lien depuis le tableau de bord
+=> /!\ On a besoin dans le fichier edit_post.php de l'id de l'article que l'on souhaite modifier
+       Il va falloir le faire voyager dans l'url du lien de modification
+
+Fichiers
+
+    - edit_post.php (traitements)
+    
+        a) Si le formulaire n'est pas soumis, on l'affiche
+            -> Sélection des auteurs pour afficher la liste déroulante des auteurs
+            -> Sélection des données de l'article à modifier pour pré remplir le formulaire
+            -> Inclusion du template
+            
+        b) Sinon (le formulaire a été soumis)
+            -> Requête de mise à jour de l'article avec les données du formulaire
+            -> Redirection vers le tableau de bord
+    
+    - edit_post.phtml (template, affichage)
+    
+    
+/****************************
+/* SUPPRESSION D'UN ARTICLE
+/****************************
+
+Fichiers
+
+    - delete_post.php (traitements)
+        -> Suppression de l'article en BDD (requête de suppression)
+        -> redirection vers le tableau de bord de l'administration 
+        
+        
+        
+    CRUD :
+    
+    Create 
+    Read 
+    Update
+    Delete
+    
+    
+    
+    
+    
+/****************************
+/* ADMINISTRATION DES AUTEURS
+/****************************
+
+-----------------------------
+Afficher la liste des auteurs
+-----------------------------
+
+    - admin.php
+    
+        -> requête de sélection des auteurs
+        
+    - admin.phtml 
+    
+        -> affichage de la liste des auteurs sous forme d'un tableau
+        
+-----------------------------
+     Ajouter un auteur
+-----------------------------
+    
+    - admin.phtml 
+        
+        -> Afficher le lien "Ajouter un auteur" vers le fichier add_author.php
+            
+    - add_author.php
+    
+-----------------------------
+     Modifier un auteur
+-----------------------------
+
+    - edit_author.phtml 
+    
+        -> Code HTML du formulaire pré rempli
+        
+    - edit_post.php 
+    
+        (reproduire le fonctionnement du edit_post.php)   
+        
+-----------------------------
+     Supprimer un auteur
+-----------------------------
+
+    - delete_author.php
+    
+        (reproduire le fonctionnement du delete_post.php)   
+        
+        
+/***************/      
+/* REFACTORING */
+/***************/
+
+    => Création de fonctions pour faire des requêtes SQL dans la base de données
+    
+    
+    * requêtes de sélection (SELECT) : on récupère des résultats
+    
+        ** requêtes de sélection avec UN SEUL résultat (fetch)
+        ** requêtes de sélection avec PLUSIEURS résultats (fetchAll)
+    
+    * requêtes d'actions (INSERT, UPDATE, DELETE) : on ne récupère pas de résultats
+    
+        => 3 grands types de requêtes => 3 fonctions
+    
+    Dans les 3 cas (pour les 3 fonctions), qu'est-ce qui va varier d'une requête à l'autre ?
+    
+        -> la requête SQL elle-même 
+        -> les valeurs du tableau passé en paramètre de la méthode execute() de PDO
+        
+           
+    1°) Fonction queryAll : pour faire une requête de sélection avec PLUSIEURS résultats
+    
+    2°) Fonction queryOne : pour faire une requête de sélection avec UN SEUL résultat
+    
+    3°) Fonction executeSql : pour faire une requête d'action
+    
+    //////////////////////////////////////////////
+    
+    // MESSAGES FLASH
+    
+    
+    1) on enregistre un message sur une première page
+    2) on l'affiche ce message sur une autre page
+    
+    exemple: création d'un article :
+    1- enregistrer un message flash une fois l'article créé en bdd avec insert into
+    2- on affiche ce message flash sur le tableau de bord de l'administration (admin.php / admin.phtml) 
+    
+    
+    
+        
+    

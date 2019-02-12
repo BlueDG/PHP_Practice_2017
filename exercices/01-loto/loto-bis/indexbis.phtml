@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Le tirage du loto</title>
+</head>
+<body>
+    <header>
+        
+    </header>
+    <main>
+        <p>  <?php // foreach($tirage as $numero): ?> <?php // endforeach; ?>  </p>
+        <p>Le tirage du loto est : 
+            <?php for($index = 0 ; $index < count($tirage) ; $index++): ?>
+            <?php echo $tirage[$index] . ' '; ?>
+            <?php endfor; ?>
+        </p>
+        
+        <!-- Affichage des résultats en utilisant la fonction implode() et sans utiliser de boucle -->
+        <ul>
+            <li> <!-- On ouvre la première balise <li> -->
+                <?php echo implode('</li>, <li>', $tirage); ?>
+            </li> <!-- On ferme la dernière balise <li> -->
+        </ul>
+    </main>
+</body>
+</html>

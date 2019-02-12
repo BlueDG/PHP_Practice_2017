@@ -1,0 +1,99 @@
+NOTIONS ET CONCEPTS POO
+-----------------------
+OBJET / INSTANCE de classe
+CLASSE
+PROPRIETE
+METHODE
+CONSTRUCTEUR
+VISIBILITE
+COMPOSITION
+HERITAGE
+SURCHARGE
+
+
+La classe permet de définir des objet.
+La variable est le réceptacle de l'objet créé par la classe.
+
+1) La classe = le blueprint
+On retrouve dedans les propriétés et les méthodes.
+ex rectangle: 2 propriétés: width and height.
+
+
+2) L'objet = La création du blueprint
+3) La variable = Le réceptacle d'une création. On met une création du plan dans une variable.
+
+4) Le constructeur = Une méthode automatique appelée lorsque l'ont tape new "etc".
+Elles sont repérables car ont le double __ devant construct par exemple.
+Le constructeur n'est pas obligatoire. Il permet de faire l'objet.
+
+5) La visibilité: private ou public ou protected.
+Obligatoire et à définir en PHP. 
+Les méthodes sont public par défaut.
+Les propriétés elles, sont à définir par le dev.
+
+6) L'héritage explique que des classes peuvent héréditer de propriétés de classes parents.
+EN PHP UNE CLASSE NE PEUT AVOIR QU'UN SEUL PARENT.
+ex: class Rectangle extends Shape {
+(Signifie que Rectangle hérédite de Shape)
+- Protected = que pour les enfants.
+- Public = à l'enfant et tout le reste, le code principal, les autres classes etc
+la visibilité permet de choisir ce que l'on transmet à l'enfant.
+
+7) La composition = c'est une classe qui utilise une variable contenant elle même un objet d'une autre classe. On stocke des objets dans les propriétés d'une certaine classe.
+
+
+8) SURCHARGE : redéfinir une méthode dans la classe ENFANT dont on hérite du PARENT.
+            Celle de l'enfant écrase celle du parent
+            
+            
+Prof: 
+
+CONSTRUCTEUR : méthode __construct() appelée lors de la création d'un objet
+METHODE MAGIQUE : des méthodes appelées automatiquement par PHP, dontl e nom commence par "__"
+VISIBILITE : public / private / protected
+COMPOSITION : stocker un objet d'une certaine classe dans une propriété d'un objet d'une autre classe
+HERITAGE /!\ Pas d'héritage multiple en PHP, une classe ne peut avoir qu'un seul parent
+SURCHARGE : redéfinir une méthode dans la classe ENFANT dont on hérite du PARENT.
+            Celle de l'enfant écrase celle du parent
+            
+            
+ABSTRACTION : 
+    -> CLASSE abstraite : on ne peut pas l'instancier, on s'en sert à travers l'héritage
+    -> METHODE abstraite : les classes ENFANT doivent obligatoirement implémenter les méthodes abstraites de leur parent
+    
+    
+    ICI ANCIEN CODE PHTML EXERCICE AVANT BOUCLE:
+    <!-- On va écrire les balises SVG de formes ici -->
+        <!--<?= $rect1->draw(); ?>-->
+        
+        <!-- C'est cette ligne là qui permet de dessiner et d'afficher ce que tu as programmé -->
+        <?= $rect2->draw(); ?>
+        
+        <?= $circle->draw(); ?>
+        
+        <?= $rect3->draw(); ?>
+        
+        <?= $rect4->draw(); ?>
+        
+        <?= $ell1->draw(); ?>
+        
+        <?= $triangle1->draw(); ?>
+        
+        <?= $polygon1->draw(); ?>
+        
+        
+/* ******************************************************************* /
+
+[DONE] 1) Créer une classe App qui va contenir tout le code principal de notre application
+[DONE] 2) Séparer le rendu visuel SVG des formes de leur données et de leur construction
+[DONE] 3) Automatiser l'inclusion des fichiers de classes grâce à un autoloader
+
+/* ******************************************************************* /
+
+
+Autoloading
+-----------
+
+A regarder pour la suite :
+-> Composer (outil qu igère lui-même l'autoloading de classes)
+-> Utilise la norme PSR-4 (https://www.php-fig.org/psr/psr-4/)

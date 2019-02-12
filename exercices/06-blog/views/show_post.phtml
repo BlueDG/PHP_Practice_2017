@@ -1,0 +1,57 @@
+
+        <!-- Page article -->
+        <h2><i class="fa fa-file-text-o"></i>Page Article</h2>
+        
+        <!-- Article du blog -->
+        <section class="post">
+            <h3><?= htmlspecialchars($article['Title']); ?></h3>
+            <article><?= htmlspecialchars($article['Contents']); ?></article>
+            <small>
+                Rédigé par <?= htmlspecialchars($article['Firstname']); ?> <?= htmlspecialchars($article['Lastname']); ?>
+                Le <?= htmlspecialchars($article['Created_At']); ?>
+            </small>
+        </section>
+        
+        <hr>
+        
+        <!-- Liste des commentaires de l'article -->
+        <ul class="comment-list">
+            <?php foreach($comments as $comment): ?>
+                <li class="comment">
+                    <h4>
+                        <i class="fa fa-comment"></i> Rédigé par <?= htmlspecialchars($comment['Nickname']); ?>
+                        Le <?= htmlspecialchars($comment['Created_At']); ?>
+                    </h4>
+                    <article><?= htmlspecialchars($comment['Contents']); ?></article>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        
+        <hr>
+        
+        <!-- Formulaire de saisie d'un nouveau commentaire pour cet article -->
+        <form class="generic-form" action="add_comment.php" method="POST">
+            
+            <!-- Ajout d'un champ caché (masqué) pour envoyer l'id de l'article -->
+            <input type="hidden" id="postId" name="postId" value="<?= $article['Article_Id']; ?>">
+            
+            
+            <fieldset>
+                <legend><i class="fa fa-comment-o"></i> Nouveau commentaire</legend>
+                <ul>
+                    <li>
+                        <label for="nickname">Pseudo</label>
+                        <input type="text" id="nickname" name="nickname">
+                    </li>
+                    <li>
+                        <label for="contents">Commentaire</label>
+                        <textarea id="contents" name="contents" rows="5"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="Enregistrer" class="button button-primary">
+                    </li>
+            </fieldset>    
+        </form>
+        
+        
+    
